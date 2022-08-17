@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-function Section() {
+function Section({modelName, imageURL}) {
+  console.log(imageURL);
   return (
-    <Wrap>
+    <Wrap imageURL={imageURL}>
       <ItemText>
-        <h1>Model S</h1>
+        <h1>{modelName}</h1>
         <p>Order Online for Touchless Delivery</p>
       </ItemText>
       <Buttons>
@@ -27,7 +28,7 @@ const Wrap = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("/images/model-s.jpg");
+  background-image: ${props => `url("/images/${props.imageURL}")`};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -41,7 +42,10 @@ const ItemText = styled.div`
 
 const ButtonGroup = styled.div`
   display: flex;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const LeftButton = styled.button`
@@ -57,11 +61,13 @@ const LeftButton = styled.button`
   text-transform: uppercase;
   cursor: pointer;
   margin: 8px;
+  border: none;
 `;
 
 const RightButton = styled(LeftButton)`
   background-color: #d4d3d2;
   color: #393c41;
+  opacity: 0.65;
 `;
 
 const DownArrow = styled.img`
